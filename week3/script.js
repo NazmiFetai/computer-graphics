@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import {gsap} from 'gsap';
 const scene= new THREE.Scene();
 
 const camera= new THREE.PerspectiveCamera(
@@ -23,6 +23,17 @@ scene.add(cube);
 cube.position.x = -2;
 camera.position.z = 5;
 
+gsap.to(cube.rotation, {
+    duration: 2,
+    x: Math.PI * 2, // Full rotation on X-axis
+    y: Math.PI * 2, // Full rotation on Y-axis
+    repeat: -1,     // Infinite loop
+    yoyo: true,     // Reverse the animation after each iteration
+    ease: "power1.inOut" // Easing function
+  });
+
+
+gsap.to(cube.position,{duration:2, x:2, repeat:-1, yoyo:true});
 const tick = ()=> {
     console.log("A");
     renderer.render(scene,camera);
